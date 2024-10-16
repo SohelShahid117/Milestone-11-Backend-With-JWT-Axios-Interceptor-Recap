@@ -19,6 +19,8 @@ import {
 import "./index.css";
 import Main from "./Layout/Main";
 import Home from "./Pages/Home/Home";
+import Login from "./Pages/Login/Login";
+import About from "./Pages/About/About";
 
 const router = createBrowserRouter([
   {
@@ -29,14 +31,26 @@ const router = createBrowserRouter([
       {
         path:"/",
         element:<Home></Home>
-
+      },
+      {
+        path:"/login",
+        element:<Login></Login>
+      },
+      {
+        path:"/about",
+        element:<About></About>
       }
     ]
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  // <React.StrictMode>
+  //   <RouterProvider router={router} />
+  // </React.StrictMode>
+  <div className="max-w-7xl mx-auto">
+     <React.StrictMode>
+        <RouterProvider router={router} />
+     </React.StrictMode>
+  </div>
 );
