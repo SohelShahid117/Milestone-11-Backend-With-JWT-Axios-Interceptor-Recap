@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import login from "../../assets/images/login/login.svg"
 import { Link } from 'react-router-dom';
+import { authContext } from '../../Providers/Authproviders';
 
 const SignUp = () =>{
+    const {createUser} = useContext(authContext);
+    console.log(createUser);
+
+
     const handleSignUp = (e) =>{
         e.preventDefault();
         console.log("hi")
-    }
+
+        const form = e.target;
+        const name = form.username.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(form,name,email,password);
+
+        createUser(email,password)
+        // .then(result=>console.log(result.user))
+        .then(result=>{
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(err=>console.log(err))
+    };
+
+
     return (
         <div className="hero min-h-screen">
         <div className="hero-content flex-col lg:flex-row gap-10">
@@ -25,7 +46,7 @@ const SignUp = () =>{
                 <label className="label">
                   <span className="label-text">Username</span>
                 </label>
-                <input type="text" name="username" placeholder="ucsername" className="input input-bordered" required />
+                <input type="text" name="username" placeholder="username" className="input input-bordered" required />
               </div>
               <div className="form-control">
                 <label className="label">
