@@ -14,7 +14,7 @@ const Banner = () => {
     //   src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
       src={img1}
       className="w-full rounded-xl" />
-    <div className="absolute h-full justify-between bg-gradient-to-r from-[#000000] to-[rgb(10 10 10)]">
+    <div className="absolute h-full justify-between bg-gradient-to-r from-[#000000] to-[rgb(10 10 10)] rounded-xl">
       <div className='text-white space-y-5 ml-10'>
         <h2 className='text-6xl font-semibold mt-32 mb-6'>Affordable <br></br> Price For Car
          <br></br> Servicing</h2>
@@ -35,54 +35,127 @@ const Banner = () => {
   </div>
   <div id="slide2" className="carousel-item relative w-full">
     <img
-    //   src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
-    src={img2}
-      className="w-full" />
-    <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a href="#slide1" className="btn btn-circle">❮</a>
+    //   src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
+      src={img2}
+      className="w-full rounded-xl" />
+    <div className="absolute h-full justify-between bg-gradient-to-r from-[#000000] to-[rgb(10 10 10)] rounded-xl">
+      <div className='text-white space-y-5 ml-10'>
+        <h2 className='text-6xl font-semibold mt-32 mb-6'>Affordable <br></br> Price For Car
+         <br></br> Servicing</h2>
+        <p className='text-md mb-6'>There are many variations of passages of  available, but
+            <br></br> the majority have suffered alteration in some form</p>
+            <button className="btn bg-[#FF3811] border-[#FF3811] text-white hover:bg-[#FF3811] hover:text-white mr-5">Discover More</button>
+            <button className="btn btn-outline border-white text-white hover:bg-[#FF3811] hover:text-white">Latest Project</button>
+      </div>
+    </div>
+    <div className="absolute left-5 right-5 top-3/4 flex -translate-y-1/2 transform justify-end">
+      <a href="#slide1" className="btn btn-circle bg-[#FF3811] border-[#FF3811] text-white hover:bg-[#FF3811] hover:text-white mr-5">❮</a>
       <a href="#slide3" className="btn btn-circle">❯</a>
     </div>
+    {/* <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+      <a href="#slide6" className="btn btn-circle">❮</a>
+      <a href="#slide2" className="btn btn-circle">❯</a>
+    </div> */}
   </div>
   <div id="slide3" className="carousel-item relative w-full">
     <img
-    //   src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
-    src={img3}
-      className="w-full" />
-    <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a href="#slide2" className="btn btn-circle">❮</a>
+    //   src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
+      src={img3}
+      className="w-full rounded-xl" />
+    <div className="absolute h-full justify-between bg-gradient-to-r from-[#000000] to-[rgb(10 10 10)] rounded-xl">
+      <div className='text-white space-y-5 ml-10'>
+        <h2 className='text-6xl font-semibold mt-32 mb-6'>Affordable <br></br> Price For Car
+         <br></br> Servicing</h2>
+        <p className='text-md mb-6'>There are many variations of passages of  available, but
+            <br></br> the majority have suffered alteration in some form</p>
+            <button className="btn bg-[#FF3811] border-[#FF3811] text-white hover:bg-[#FF3811] hover:text-white mr-5">Discover More</button>
+            <button className="btn btn-outline border-white text-white hover:bg-[#FF3811] hover:text-white">Latest Project</button>
+      </div>
+    </div>
+    <div className="absolute left-5 right-5 top-3/4 flex -translate-y-1/2 transform justify-end">
+      <a href="#slide2" className="btn btn-circle bg-[#FF3811] border-[#FF3811] text-white hover:bg-[#FF3811] hover:text-white mr-5">❮</a>
       <a href="#slide4" className="btn btn-circle">❯</a>
     </div>
+    {/* <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+      <a href="#slide6" className="btn btn-circle">❮</a>
+      <a href="#slide2" className="btn btn-circle">❯</a>
+    </div> */}
   </div>
   <div id="slide4" className="carousel-item relative w-full">
     <img
-    //   src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
-    src={img4}
-      className="w-full" />
-    <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a href="#slide3" className="btn btn-circle">❮</a>
+    //   src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
+      src={img4}
+      className="w-full rounded-xl" />
+    <div className="absolute h-full justify-between bg-gradient-to-r from-[#000000] to-[rgb(10 10 10)] rounded-xl">
+      <div className='text-white space-y-5 ml-10'>
+        <h2 className='text-6xl font-semibold mt-32 mb-6'>Affordable <br></br> Price For Car
+         <br></br> Servicing</h2>
+        <p className='text-md mb-6'>There are many variations of passages of  available, but
+            <br></br> the majority have suffered alteration in some form</p>
+            <button className="btn bg-[#FF3811] border-[#FF3811] text-white hover:bg-[#FF3811] hover:text-white mr-5">Discover More</button>
+            <button className="btn btn-outline border-white text-white hover:bg-[#FF3811] hover:text-white">Latest Project</button>
+      </div>
+    </div>
+    <div className="absolute left-5 right-5 top-3/4 flex -translate-y-1/2 transform justify-end">
+      <a href="#slide3" className="btn btn-circle bg-[#FF3811] border-[#FF3811] text-white hover:bg-[#FF3811] hover:text-white mr-5">❮</a>
       <a href="#slide5" className="btn btn-circle">❯</a>
     </div>
+    {/* <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+      <a href="#slide6" className="btn btn-circle">❮</a>
+      <a href="#slide2" className="btn btn-circle">❯</a>
+    </div> */}
   </div>
   <div id="slide5" className="carousel-item relative w-full">
     <img
-    //   src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
+    //   src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
       src={img5}
-      className="w-full" />
-    <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a href="#slide4" className="btn btn-circle">❮</a>
+      className="w-full rounded-xl" />
+    <div className="absolute h-full justify-between bg-gradient-to-r from-[#000000] to-[rgb(10 10 10)] rounded-xl">
+      <div className='text-white space-y-5 ml-10'>
+        <h2 className='text-6xl font-semibold mt-32 mb-6'>Affordable <br></br> Price For Car
+         <br></br> Servicing</h2>
+        <p className='text-md mb-6'>There are many variations of passages of  available, but
+            <br></br> the majority have suffered alteration in some form</p>
+            <button className="btn bg-[#FF3811] border-[#FF3811] text-white hover:bg-[#FF3811] hover:text-white mr-5">Discover More</button>
+            <button className="btn btn-outline border-white text-white hover:bg-[#FF3811] hover:text-white">Latest Project</button>
+      </div>
+    </div>
+    <div className="absolute left-5 right-5 top-3/4 flex -translate-y-1/2 transform justify-end">
+      <a href="#slide4" className="btn btn-circle bg-[#FF3811] border-[#FF3811] text-white hover:bg-[#FF3811] hover:text-white mr-5">❮</a>
       <a href="#slide6" className="btn btn-circle">❯</a>
     </div>
+    {/* <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+      <a href="#slide6" className="btn btn-circle">❮</a>
+      <a href="#slide2" className="btn btn-circle">❯</a>
+    </div> */}
   </div>
   <div id="slide6" className="carousel-item relative w-full">
     <img
-    //   src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
+    //   src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
       src={img6}
-      className="w-full" />
-    <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a href="#slide5" className="btn btn-circle">❮</a>
+      className="w-full rounded-xl" />
+    <div className="absolute h-full justify-between bg-gradient-to-r from-[#000000] to-[rgb(10 10 10)] rounded-xl">
+      <div className='text-white space-y-5 ml-10'>
+        <h2 className='text-6xl font-semibold mt-32 mb-6'>Affordable <br></br> Price For Car
+         <br></br> Servicing</h2>
+        <p className='text-md mb-6'>There are many variations of passages of  available, but
+            <br></br> the majority have suffered alteration in some form</p>
+            <button className="btn bg-[#FF3811] border-[#FF3811] text-white hover:bg-[#FF3811] hover:text-white mr-5">Discover More</button>
+            <button className="btn btn-outline border-white text-white hover:bg-[#FF3811] hover:text-white">Latest Project</button>
+      </div>
+    </div>
+    <div className="absolute left-5 right-5 top-3/4 flex -translate-y-1/2 transform justify-end">
+      <a href="#slide5" className="btn btn-circle bg-[#FF3811] border-[#FF3811] text-white hover:bg-[#FF3811] hover:text-white mr-5">❮</a>
       <a href="#slide1" className="btn btn-circle">❯</a>
     </div>
+    {/* <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+      <a href="#slide6" className="btn btn-circle">❮</a>
+      <a href="#slide2" className="btn btn-circle">❯</a>
+    </div> */}
   </div>
+
+
+
 </div>
     );
 };

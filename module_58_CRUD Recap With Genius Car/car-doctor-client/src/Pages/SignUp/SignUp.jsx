@@ -2,8 +2,8 @@ import React from 'react';
 import login from "../../assets/images/login/login.svg"
 import { Link } from 'react-router-dom';
 
-const Login = () => {
-    const handleLogin = (e) =>{
+const SignUp = () =>{
+    const handleSignUp = (e) =>{
         e.preventDefault();
         console.log("hi")
     }
@@ -19,8 +19,14 @@ const Login = () => {
             <img src={login} alt="" srcset="" />
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <h1 className="text-4xl font-bold p-5 text-center">Login now!</h1>
-            <form className="card-body" onSubmit={handleLogin}>
+          <h1 className="text-4xl font-bold p-5 text-center">Sign Up</h1>
+            <form className="card-body" onSubmit={handleSignUp}>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Username</span>
+                </label>
+                <input type="text" name="username" placeholder="ucsername" className="input input-bordered" required />
+              </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -31,18 +37,16 @@ const Login = () => {
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input type="password" name='password' placeholder="password" className="input input-bordered" required />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                </label>
+                <input type="password" name='password' placeholder="confirm password" className="input input-bordered" required />
+            
               </div>
               <div className="form-control mt-6">
                 {/* <button className="btn btn-primary">Sign In</button> */}
                 {/* <button className="btn bg-[#FF3811] border-[#FF3811] text-white hover:bg-[#FF3811] hover:text-white mr-5"> */}
-                <input type='submit' value="Sign In" className="input btn bg-[#FF3811] border-[#FF3811] text-white hover:bg-[#FF3811] hover:text-white mr-5"/>
+                <input type='submit' value="Sign Up" className="input btn bg-[#FF3811] border-[#FF3811] text-white hover:bg-[#FF3811] hover:text-white mr-5"/>
               </div>
             </form>
-            <p className='py-5 text-center'>New to Car Doctors?go to <Link to="/signUp" className='font-bold text-[#FF3811]'>Sign Up</Link> </p>
+            <p className='py-5 text-center'>Already have an account?go to <Link to="/login" className='font-bold text-[#FF3811]'>Login</Link> </p>
         
           </div>
         </div>
@@ -50,4 +54,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;
