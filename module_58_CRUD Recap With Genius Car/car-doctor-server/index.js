@@ -18,7 +18,7 @@ console.log(process.env.DB_USER)
 console.log(process.env.DB_PASS)
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 /*
 const uri = "mongodb+srv://<db_username>:<db_password>@cluster0.hfhifix.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 */
@@ -38,12 +38,40 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+
     const serviceCollection = client.db('Car_Doctor_Recap_DB').collection('services')
     // console.log(serviceCollection);
+    const bookingOrdersCollection = client.db('Car_Doctor_Recap_DB').collection('bookingOrders')
 
     app.get("/services",async(req,res)=>{
       const result = await serviceCollection.find().toArray();
       res.send(result);
+    })
+
+    app.get("/services/:id",async(req,res)=>{
+      const id = req.params.id;
+      const query = {_id : new ObjectId(id)}
+      const options = {projection: { _id: 1,service_id:1,img:1, title: 1, price:1 },}
+      // const result= await serviceCollection.findOne(query)
+      const result= await serviceCollection.findOne(query,options)
+      res.send(result)
+    })
+
+    app.post("/bookingOrders",async(req,res)=>{
+      const bookingOrders = req.body;
+      console.log(bookingOrders)
+  
+      const result = await bookingOrdersCollection.insertOne(bookingOrders)
+      res.send(result)
+    })
+
+    app.get("/bookingsOrder",async(req,res)=>{
+      console.log(req.query)
+      if(req.query?.email){
+        query ={email:req.query.email}
+      }
+      const result = await bookingOrdersCollection.find(query).toArray();
+      res.send(result)
     })
 
 
