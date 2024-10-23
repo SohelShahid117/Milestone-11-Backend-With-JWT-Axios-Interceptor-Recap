@@ -52,6 +52,7 @@ async function run() {
       const id = req.params.id;
       const query = {_id : new ObjectId(id)}
       const options = {projection: { _id: 1,service_id:1,img:1, title: 1, price:1 },}
+      //1 dile data t DB teke asbe r 0 dile asbena;img:1-->img asbe
       // const result= await serviceCollection.findOne(query)
       const result= await serviceCollection.findOne(query,options)
       res.send(result)
@@ -67,11 +68,43 @@ async function run() {
 
     app.get("/bookingsOrder",async(req,res)=>{
       console.log(req.query)
+      // const  query ={email:req.query?.email}
       if(req.query?.email){
-        query ={email:req.query.email}
+        // let query ={email:req.query.email}
+       query ={email:req.query.email}
       }
       const result = await bookingOrdersCollection.find(query).toArray();
       res.send(result)
+    })
+
+    app.delete("/bookingsOrder/:id",async(req,res)=>{
+      const id = req.params.id;
+      let query = {_id : new ObjectId(id)};
+      // const query = { _id : new ObjectId (id)};
+      const result = await bookingOrdersCollection.deleteOne(query);
+      res.send(result);
+      console.log(result)
+    })
+
+    app.patch("/bookingsOrder/:id",async(req,res)=>{
+      const updateBooking = req.body;
+      console.log(updateBooking)
+      const id = req.params.id;
+      // const query = {_id : new ObjectId(id)};
+      const filter = {_id : new ObjectId(id)};
+
+      // const filter = { title: "Random Harvest" };
+      const updateDoc = {
+        $set: {
+          status:updateBooking.status
+        },
+      };
+      // const options = { upsert: true };
+      // const result = await bookingOrdersCollection.updateOne(filter, updateDoc, options);
+      const result = await bookingOrdersCollection.updateOne(filter, updateDoc);
+      res.send(result)
+
+
     })
 
 
