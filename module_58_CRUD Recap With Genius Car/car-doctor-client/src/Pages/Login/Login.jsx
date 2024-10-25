@@ -28,8 +28,15 @@ const Login = () => {
         console.log(loggedInUser);
         
         const user = {email}
-        axios.post("http://localhost:5000/jwt",user)
-        .then(data=>console.log(data.data))
+        // axios.post("http://localhost:5000/jwt",user)
+        axios.post("http://localhost:5000/jwt",user,{withCredentials:true})
+        // .then(data=>console.log(data.data))
+        .then(data=>{
+          console.log(data.data)
+          if(data.data.success){
+            navigate(location?.state ? location.state : "/")
+          }
+        })
         // navigate(location?.state ? location.state : "/")
       })
       .catch((err) => console.log(err));

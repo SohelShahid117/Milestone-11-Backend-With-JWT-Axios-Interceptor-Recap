@@ -6,19 +6,34 @@ require('dotenv').config()
 const port = process.env.PORT || 5000;
 
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser')
 
 
 //middleware
-app.use(cors());
+// app.use(cors());
+
+//for token,here add origin & credentials
+app.use(cors(
+  {
+    origin:['http://localhost:5173'],
+    credentials:true
+  }
+));
 app.use(express.json());
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
+
+  //https://expressjs.com/en/resources/middleware/cookie-parser.html
+  console.log('Cookies: ', req.cookies)
+  console.log('Signed Cookies: ', req.signedCookies)
 })
 
 // console.log(process.env)
 console.log(process.env.DB_USER)
 console.log(process.env.DB_PASS)
+console.log(process.env.ACCESS_TOKEN_SECRET)
 
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
@@ -49,10 +64,18 @@ async function run() {
    //auth related API
    app.post("/jwt",async(req,res)=>{
     const user = req.body;
-    console.log(user)
-    const token = jwt.sign(user,'secret', {expiresIn:'1h'});
+    console.log('user is-',user)
+    // const token = jwt.sign(user,'secret', {expiresIn:'1h'});
     // res.send(user)
-    res.send(token)
+    const token = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET, {expiresIn:'3h'});
+    res
+    .cookie('token',token,{
+      httpOnly:true,
+      secure:false,    //http://localhost:5000/--->https nai tai secure:false
+      // sameSite:'none'  //coz client & server both r running in different port
+    })
+    .send({success:true})
+    // res.send(token)
    })
    
    //service related API
@@ -81,6 +104,7 @@ async function run() {
 
     app.get("/bookingsOrder",async(req,res)=>{
       console.log(req.query)
+      console.log("token is:",req.cookies.token)
       // const  query ={email:req.query?.email}
       if(req.query?.email){
         // let query ={email:req.query.email}
@@ -116,8 +140,6 @@ async function run() {
       // const result = await bookingOrdersCollection.updateOne(filter, updateDoc, options);
       const result = await bookingOrdersCollection.updateOne(filter, updateDoc);
       res.send(result)
-
-
     })
 
 
@@ -141,6 +163,6 @@ app.listen(port, () => {
 /*
 1.what is JWT & what is the importance of JWT
 2.How use JWT?
-2.what is Access Token & what is refresh Token?
-3.
+3.what is Access Token & what is refresh Token?
+4.
 */
