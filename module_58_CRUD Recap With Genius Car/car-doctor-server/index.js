@@ -52,6 +52,38 @@ const client = new MongoClient(uri, {
   }
 });
 
+//abar middleware banao nije nije
+const logger = async(req,res,next)=>{
+  // console.log("call korlam : ",req.host,req.originalUrl);
+  console.log("call korlam : ",req.hostname,req.originalUrl);
+  next();
+}
+
+const verifyToken = async(req,res,next)=>{
+  const tokenNow = req.cookies?.tokennn;
+  console.log("token in middleware--->server side:",tokenNow);
+  if(!tokenNow){
+    // return res.send({message:"not authorized"});
+    return res.status(401).send({message:"not authorized"});
+  }
+  jwt.verify(tokenNow,process.env.ACCESS_TOKEN_SECRET,(err,decoded)=>{
+    //err
+    if(err){
+      console.log("err is :",err)
+      return res.status(401).send({message:"not authorized"});
+    }
+    //decoded--->if token is valid then it would be decoded
+    // console.log("value in the token:",tokenNow)
+    // console.log("value in the token:",tokenNow)
+    console.log("value in the token:",decoded)
+    req.user = decoded;
+
+    next();
+
+  })
+  // next();
+}
+
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
@@ -62,7 +94,7 @@ async function run() {
     const bookingOrdersCollection = client.db('Car_Doctor_Recap_DB').collection('bookingOrders')
 
    //auth related API
-   app.post("/jwt",async(req,res)=>{
+   app.post("/jwt",logger,async(req,res)=>{
     const user = req.body;
     console.log('user is-',user)
     // const token = jwt.sign(user,'secret', {expiresIn:'1h'});
@@ -79,7 +111,7 @@ async function run() {
    })
    
    //service related API
-    app.get("/services",async(req,res)=>{
+    app.get("/services",logger,async(req,res)=>{
       const result = await serviceCollection.find().toArray();
       res.send(result);
     })
@@ -102,13 +134,15 @@ async function run() {
       res.send(result)
     })
 
-    app.get("/bookingsOrder",async(req,res)=>{
+    app.get("/bookingsOrder",logger,verifyToken,async(req,res)=>{
       console.log(req.query.email)
       // console.log("token is:",req.cookies.token)
       // console.log("token is:",req.cookie.token)
       // console.log("token is:",req.cookies)   //.cookie('tokennn',token,{}
       console.log("token is:",req.cookies.tokennn)   //.cookie('tokennn',token,{}
       // const  query ={email:req.query?.email}
+      // console.log("from verifyToken decoded user is:",req.user)
+      console.log("from verifyToken decoded user is:",req.user.email)
       let query = {};
       if(req.query?.email){
         // let query ={email:req.query.email}
