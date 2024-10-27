@@ -32,5 +32,9 @@ how to store token in the client side
     ));
 3.client side axios setting
     in client side--->axios set withCredentials:true
+*/
 
+/*
+1.to send cookies from the client make sure,you added withCredentials:true for the API call using axios
+2.use cookie parser in server side as a middleware
 */

@@ -69,7 +69,7 @@ async function run() {
     // res.send(user)
     const token = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET, {expiresIn:'3h'});
     res
-    .cookie('token',token,{
+    .cookie('tokennn',token,{
       httpOnly:true,
       secure:false,    //http://localhost:5000/--->https nai tai secure:false
       // sameSite:'none'  //coz client & server both r running in different port
@@ -103,9 +103,13 @@ async function run() {
     })
 
     app.get("/bookingsOrder",async(req,res)=>{
-      console.log(req.query)
-      console.log("token is:",req.cookies.token)
+      console.log(req.query.email)
+      // console.log("token is:",req.cookies.token)
+      // console.log("token is:",req.cookie.token)
+      // console.log("token is:",req.cookies)   //.cookie('tokennn',token,{}
+      console.log("token is:",req.cookies.tokennn)   //.cookie('tokennn',token,{}
       // const  query ={email:req.query?.email}
+      let query = {};
       if(req.query?.email){
         // let query ={email:req.query.email}
        query ={email:req.query.email}
