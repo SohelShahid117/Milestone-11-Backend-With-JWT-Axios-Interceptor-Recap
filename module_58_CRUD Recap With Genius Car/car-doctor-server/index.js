@@ -1,11 +1,16 @@
 const express = require('express')
 const app = express()
+
+//why use cors?-->collect ans from chatgpt,google,youtube
 const cors = require('cors');
 
+//why use dotenv & config()
 require('dotenv').config()
 const port = process.env.PORT || 5000;
 
 const jwt = require('jsonwebtoken');
+
+//why use 'cookie-parser' & what is cookie?
 const cookieParser = require('cookie-parser')
 
 
@@ -40,6 +45,8 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 /*
 const uri = "mongodb+srv://<db_username>:<db_password>@cluster0.hfhifix.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 */
+
+//this is from mongoDB
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.hfhifix.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 console.log(uri);
 
@@ -60,6 +67,7 @@ const logger = async(req,res,next)=>{
 }
 
 const verifyToken = async(req,res,next)=>{
+  console.log(req.cookies)
   const tokenNow = req.cookies?.tokennn;
   console.log("token in middleware--->server side:",tokenNow);
   if(!tokenNow){
@@ -74,16 +82,14 @@ const verifyToken = async(req,res,next)=>{
     }
     //decoded--->if token is valid then it would be decoded
     // console.log("value in the token:",tokenNow)
-    // console.log("value in the token:",tokenNow)
     console.log("value in the token:",decoded)
     req.user = decoded;
-
     next();
-
   })
   // next();
 }
 
+//this is from mongoDB
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
@@ -91,15 +97,19 @@ async function run() {
 
     const serviceCollection = client.db('Car_Doctor_Recap_DB').collection('services')
     // console.log(serviceCollection);
+
+    //app.post("/bookingOrders",async(req,res)=>{...}
     const bookingOrdersCollection = client.db('Car_Doctor_Recap_DB').collection('bookingOrders')
 
    //auth related API
+   //axios.post("http://localhost:5000/jwt",user,{withCredentials:true}) from Login Component
    app.post("/jwt",logger,async(req,res)=>{
     const user = req.body;
     console.log('user is-',user)
     // const token = jwt.sign(user,'secret', {expiresIn:'1h'});
     // res.send(user)
     const token = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET, {expiresIn:'3h'});
+    
     res
     .cookie('tokennn',token,{
       httpOnly:true,
@@ -111,11 +121,13 @@ async function run() {
    })
    
    //service related API
+   //fetch('http://localhost:5000/services') from Home repo Service component
     app.get("/services",logger,async(req,res)=>{
       const result = await serviceCollection.find().toArray();
       res.send(result);
     })
 
+    //loader:({params})=>fetch(`http://localhost:5000/services/${params.id}`) from main.jsx & Checkout component
     app.get("/services/:id",async(req,res)=>{
       const id = req.params.id;
       const query = {_id : new ObjectId(id)}
@@ -126,6 +138,7 @@ async function run() {
       res.send(result)
     })
 
+    //fetch("http://localhost:5000/bookingOrders",{...} from  Checkout component
     app.post("/bookingOrders",async(req,res)=>{
       const bookingOrders = req.body;
       console.log(bookingOrders)
@@ -134,8 +147,9 @@ async function run() {
       res.send(result)
     })
 
+    //const url = `http://localhost:5000/bookingsOrder?email=${user?.email}`; from BookingsOrder Component
     app.get("/bookingsOrder",logger,verifyToken,async(req,res)=>{
-      console.log(req.query.email)
+      console.log("query email is:",req.query.email)
       // console.log("token is:",req.cookies.token)
       // console.log("token is:",req.cookie.token)
       // console.log("token is:",req.cookies)   //.cookie('tokennn',token,{}
@@ -143,6 +157,10 @@ async function run() {
       // const  query ={email:req.query?.email}
       // console.log("from verifyToken decoded user is:",req.user)
       console.log("from verifyToken decoded user is:",req.user.email)
+
+      if(req.query.email !=req.user.email){
+        return res.status(403).send({message:"forbidden access"})
+      }
       let query = {};
       if(req.query?.email){
         // let query ={email:req.query.email}
@@ -152,6 +170,7 @@ async function run() {
       res.send(result)
     })
 
+    //fetch(`http://localhost:5000/bookingsOrder/${_id}`,{...} from BookingsOrder Component
     app.delete("/bookingsOrder/:id",async(req,res)=>{
       const id = req.params.id;
       let query = {_id : new ObjectId(id)};
@@ -161,6 +180,7 @@ async function run() {
       console.log(result)
     })
 
+    //fetch(`http://localhost:5000/bookingsOrder/${id}`,{...}  from BookingsOrder Component
     app.patch("/bookingsOrder/:id",async(req,res)=>{
       const updateBooking = req.body;
       console.log(updateBooking)
@@ -179,8 +199,6 @@ async function run() {
       const result = await bookingOrdersCollection.updateOne(filter, updateDoc);
       res.send(result)
     })
-
-
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
